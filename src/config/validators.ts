@@ -12,11 +12,15 @@ export class Validators {
 
     public requiredKeys( ...keys: string[]) {
         keys.forEach(k => {
-            if(!this.data[k]) throw `${k} faltante`;
+            if(!this.data[k]) {
+                if(this.data[k] == 0) return; 
+                throw `${k} faltante`;
+            }
         })
     }
 
     public isRequired(key: string) {
+        if(this.data[key] == 0) return; 
         if(!this.data[key]) throw `${key} faltante`;
     }
 

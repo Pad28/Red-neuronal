@@ -2,37 +2,58 @@ import { Validators } from "../../../config/validators";
 
 export class CreatePredictDto {
     private constructor(
-        public readonly glucosa: number,
-        public readonly presion_arterial: number,
-        public readonly insulina: number,
+        public readonly edad: number,
+        public readonly fumador_frecuente: number,
+        public readonly cigarros_por_dia: number,
+        public readonly medicamentos: number,
+        public readonly diabetes: number,
+        public readonly colesterol: number,
+        public readonly sistolica: number,
+        public readonly diastolica: number,
         public readonly imc: number,
-        public readonly diabetes_pedrigui_funcion: number,
+        public readonly glucosa: number,
     ) {}
 
     static create(data: {[key: string]: any}): [string?, CreatePredictDto?] {
         try {
             const validators = new Validators(data);
-
+            
             validators.requiredKeys(
-                'glucosa', 
-                'presion_arterial', 
-                'insulina', 
-                'imc',
-                'diabetes_pedrigui_funcion'
+                "edad",
+                "fumador_frecuente",
+                "cigarros_por_dia",
+                "medicamentos",
+                "diabetes",
+                "colesterol",
+                "sistolica",
+                "diastolica",
+                "imc",
+                "glucosa",
             );
 
-            validators.isNumber('glucosa');
-            validators.isNumber('presion_arterial');
-            validators.isNumber('insulina');
-            validators.isFloat('imc');
-            validators.isNumber('diabetes_pedrigui_funcion');
+            validators.isNumber("edad");
+            validators.isNumber("fumador_frecuente");
+            validators.isNumber("cigarros_por_dia");
+            validators.isNumber("medicamentos");
+            validators.isNumber("diabetes");
+            validators.isNumber("colesterol");
+            validators.isNumber("sistolica");
+            validators.isNumber("diastolica");
+            validators.isFloat("imc");
+            validators.isNumber("glucosa");
+
 
             return [undefined, new CreatePredictDto(
-                data['glucosa'],
-                data['presion_arterial'],
-                data['insulina'],
-                data['imc'],
-                data['diabetes_pedrigui_funcion'],
+                data["edad"],
+                data["fumador_frecuente"],
+                data["cigarros_por_dia"],
+                data["medicamentos"],
+                data["diabetes"],
+                data["colesterol"],
+                data["sistolica"],
+                data["diastolica"],
+                data["imc"],
+                data["glucosa"],
             )];
         } catch (error) {
             return [error as string];
